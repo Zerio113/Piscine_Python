@@ -1,14 +1,8 @@
-# Couleurs pour le thème égyptien et de pyramide
-SAND = (244/255, 164/255, 96/255)  # Sable
-STONE = (139/255, 69/255, 19/255)  # Pierre
-DARK_STONE = (105/255, 105/255, 105/255)  # Pierre sombre
-GOLD = (255/255, 223/255, 0/255)  # Or
 
-# Remplacer les anciennes couleurs par les nouvelles
-WHITE = SAND
-LIGHT_GRAY = STONE
-DARK_GRAY = DARK_STONE
-BLACK = GOLD
+BLACK = (0, 0, 0)
+DARK_GRAY = (0.36, 0.36, 0.36)
+LIGHT_GRAY = (0.85, 0.85, 0.85)
+WHITE = (1, 1, 1)
 
 LIGHT_BLUE = (0.85, 0.85, 1)
 LIGHT_RED = (1, 0.85, 0.85)
