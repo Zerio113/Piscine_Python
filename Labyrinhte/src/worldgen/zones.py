@@ -198,11 +198,11 @@ def init_zones():
 
 class ZoneLoader:
     EMPTY = (92, 92, 92)
-    WALL = (0, 0, 0)
-    WALL_CRACKED = (30, 30, 30)
+    WALL = (145, 90, 34)
+    WALL_CRACKED = (145, 90, 34)
 
-    FLOOR = (255, 255, 255)
-    FLOOR_CRACKED = (225, 225, 225)
+    FLOOR = (179, 114, 56)
+    FLOOR_CRACKED = (179, 114, 56)
     FLOOR_FANCY = (205, 205, 205)
     FLOOR_SWAMP = (185, 185, 185)
     FLOOR_ID_LOOKUP = {FLOOR: spriteref.FLOOR_NORMAL_ID,
