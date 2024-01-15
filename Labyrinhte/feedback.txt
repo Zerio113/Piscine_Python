@@ -1,0 +1,400 @@
+
+[beta release feedback]
+
+ - KeronCyst (comment on itch)
+    - font is too small
+        - possibly fullscreening will fix this?
+    - saving system isn't well explained
+        - true
+
+ - Driftwood Gaming (1/27/2020 v1.0.0, streamer, rec'd a video, I found by googling)
+   https://www.youtube.com/watch?v=2hrn55cTqtg
+    Drifty:
+        "An RPG, but the gimmick is that it's like Tetris"
+         - went through sound + controls menu first
+         - kind of implied that I had paid $20 to have my game played (???)
+            - very weird, not sure if it was intentional
+            - "if you'd like to see your game played too, you can pay $25 or enter a contest"
+        "I have no idea what engine they used, if any, it might just be some 
+         libraries and c++ or something" - lol
+         - went through all controls + inventory before starting
+         - liked the map!
+         "8-bit music"
+         "our equipment is lego - err Tetris"
+         - first item went very well
+         "this is interesting, I like it already"
+         "can I rotate this at all?"
+         - tried to slot the potion into the hotbar, and it didn't work
+         - kept trying to put the dagger in the hotbar... but it was locked
+            - figured it out, like instantly
+         - put the potion in the equipment grid, expected it to appear in
+             hotbar. and it didn't. (this is quite a sensible idea honestly lol)
+             "aparently it lets me"
+         - "[i] doesn't appear to open the inventory"
+            - this guy is making me feel dumb
+            - saw the tooltip though
+            - "i but you push R is a little confusing"
+         
+         - OK, so there was a small muncher, with 8 hp, he hit it for 7, then
+           another small muncher threw a healing potion at it, which dealt one 
+           damage, killing it  --> "oh, so ghosts are weak to healing potions"
+           
+            MMMssdfmsmmMMM not good~~
+            
+         - seemed to enjoy the tetis inventory the first time it got tough!
+            - and chat did too
+            
+         - equipped two daggers, "does that give me more damage, I don't think
+            it does"  - phew
+         - tried to throw, couldn't figure it out
+         
+         - "I like it, I'm not gunna lie. And the music is good, a little repetitive, but I'm 
+            not sick of it"
+            
+         - do we level up?
+         - "the simple art style is good"
+         - "all the weapons are the same, that's a little disappointing"
+         - "tried to grab the mushrooms after the "
+         - "ah it's a bank of mushrooms, that's the currency"
+            - he gets it!
+         - the %66.6 made him wonder whether you lose %66.6 of your items,
+            - that's interesting. potentially not a bad idea?
+         - did not see the slug's status effect
+         - the "Press [m] to open Map." tutorial stayed onscreen literally forever..
+            - because he couldn't see it?
+         - it's a cool game, I actually really like it
+         - when you die, it should respawn you, but take some kind of currency 
+           from you. stay where you were, maybe take one item randomly. ok so I'm
+           basically back where I was 10 minutes ago, that's not fun. And it doesn't
+           let you go back and save it? that's the problem with it. Should 
+           let the player exit the dungeon whenever they want to go back and
+           save it, and or add experience because lets face it the idea behind this
+           game is you wanna make your character stonger, keep that whole pieces 
+           idea, really good idea there, there's a lot to be desired here, maybe
+           an experience system, as you get more levels your equipment expands
+           3x3 -> 4x4 -> 5x5. fantastic first look, love it, pretty good.
+         
+    Chat:
+        "Minimalistic title screen"
+        "anyoing but fun at the same time... hard to say x,D" - on inventory
+        "creative idea. I kind of like it"
+        "I really like the art style, too!"
+        "Really well done in a cool style."
+        "Reminds me of the original Rogue, except the graphics are more 
+         than just letters on screen, a few dots to indicate walls, and 
+         a 5 by 4 pixel smily face or whatever to indicate the player."
+         "Why does that fat guy look like Fat Papyrus"
+         "the writing is pretty good too"
+         "Fun stuff! Great job, dev!"
+
+ - Game Curator (through DMs, i sent a thank you message, and he replied:)
+    "About your game: I wasn't really frustrated overall, though I appreciated 
+     that you afterwards posted some gameplay hints on itch. The only thing I 
+     was confused about was the controls, as I struggled with the E and R keys. 
+     In my head it felt more natural to use the R key to rotate instead of 
+     opening the inventory.
+
+     I was aware about the map function, because I played the first three levels 
+     before I actually decided to record a little playthrough. But the levels 
+     had a great size, so I thought that I won't need it and instead explore a 
+     bit to see if I missed any enemies. :D"
+
+     Yeah, I should have used the weapons more often, touché. :) But bumping 
+     into the creatures was more fun to me, hahaha.
+
+     I am glad it helped you out in some ways. And I hope that your game will 
+     be played a bit more often now - it definitely deserves more attention. 
+     Great work, Ghast!"
+
+ - Game Curator (wrote an article + made video! 1/27/2020 v1.0.0)
+    - article:
+        - very positive
+        - thought MC was a skeleton (they're a HUSK, not a skeleton!!)
+            - it's not really that important, but could consider adding some 
+              more dialog to explain this. kinda relevant to the "lore" 
+              OH WAIT, the game actually never calls you a husk...
+              I thought mary did, but she does not lmao
+        - "innovative inventory and status points system"
+        - "As 'Skeletris' is a somewhat addictive roguelike adventure without
+           annoying permadeath, neat boss fights and really intriguing core
+           design, I simply have to highly recommend it to you. A wonderful job."
+    - video:
+        - learned the controls / gameplay a bit off-camera beforehand (much appreciated!)
+        - some mistakes:
+            - clicked the "skip" button every time, instead of pressing space
+                - i assume he tried clicking it before ever being shown the tutorial
+                - which means he'd never be shown the tutorial at depth 3 or whatever
+                - this is not good UX        
+            - filled equipment grid with daggers, even though it gives no benefit to have > 1
+            - never right-clicked to insta-pickup stuff
+                - it's never taught in game, after all
+            - didn't click-to-replace items (it's never really taught...)
+                - started doing this naturally after a while
+            - equipped the sword, but didn't actually use it, because a dagger was still active
+                - equipment grid was still full of daggers... lol
+            - frequently pressed "R", when he wanted to rotate, which closed the inventory
+                - this tapered off after a little while
+            - never really opened the map. not sure why.
+            - facetanked the crabs every time
+            - double applied a health potion
+            - couldn't figure out how to activate the whip
+                - CRITICAL UI ISSUE
+            - first death at the swamps, fighting two slugs a the same time without kiting them
+            - status effects didn't seem to register
+            - didn't hover over enemies to get info about them
+            - even after kiting the spider perfectly, didn't really kite regular enemies
+            - never threw daggers or spears at enemies
+        - used turn-skipping effectively to fight despite having to click every time
+        - NAILED the spider fight!!
+        - talked to everyone in the town!
+        - feels like there's A LOT of dialog at tombtown + cloning area
+        - it's a good thing I tuned down the difficulty of swamps
+        - instantly understood trading!
+        - just brutalized the frog boss LOL, 14 dmg.. was a bit much hmm...
+        - FIGURED OUT WEAPON ACTIVATION (40 minutes in ahhhh)
+        - seemed to get a bit fatigued with the item management after a while
+            - which is understandable~
+        - started throwing potions at the robo fight, and just barely squeaked through
+            - my heart was pounding, I can only imagine his, lmao
+        - decided to stop playing at the start of the catacombs
+        - total playtime 1hr
+        
+    takeaways:
+        - potential for CRITICAL misteachings exist
+            - the idea of activating weapons (missed, for a long time)
+            - multi-equipping weapons (misunderstood)
+            - status effects in general seems to have been missed
+            - hovering over enemies to see their stats was missed
+            - never found the MAP
+        - despite those misunderstandings, had a pretty successful run
+            - kinda lucky with items, might have gone differently otherwise
+            - made it past robo, not a small feat
+            - probably could have made it through catacombs
+        - 100% would have quit if he'd died at robo
+
+ - @lofttom (through DM, 01/25/2020 - release day v1.0.0)
+    
+    "Your game rocks man. Incredible job.
+     Inventory management and rerolling the shapes of stuff is a ton of fun and made me feel like i was optimizing
+     Went for whip and full life on kill for ez mode"
+
+    - (i said thank you, mentioned playtesters had been having difficulty)
+    
+    "Im surprised they had a hard time honestly!! But to be fair people never 
+     read the readme files lol
+     
+     Once i figured out the rest system it got easier
+     
+     Some feedback if you want it:
+     Make the dying animation more dramatic, its a little quick
+     devoted boyfriend and father
+     
+     Also an idea: consider a gauntlet mode unlocked for beating the game or 
+     something, a chest after each boss or something? Would be cool to hve a 
+     quick gamemode for ppl who want to play something fast"
+     
+    takeaways:
+        - someone likes it!! anxiety melting away
+        - enemy death animations do suck, lol, should fix
+        - rest system is crucial, needs better explained
+        - an endless 'survival' mode after the main game would actually be very cool
+            - would sorta actually *be* a pure roguelike at that point.
+            - endless content requires a lot of content
+                - generate "attributes" on enemies
+                - boss versions of standard enemies
+
+
+[pre-beta playtesting notes]
+
+ - coffee shop guy (nervous dog) (7/21/19)
+    situation: stranger, asked what i was working on, i offered to let him playtest
+    - 45 minutes, made it through 2 levels
+    - thought flashing red dagger meant it would break soon
+    - couldn't figure out how to pick up items (mouse)
+    - couldn't figure out how how to open inventory
+    - couldn't figure out how how to rotate items
+    - avoided ReturnExitEntity, thought it was fire and would kill him
+        - correct behavior, but incorrect reasoning. probably fine?
+    - put dagger into inventory instead of equipment grid
+    - but figured out how to use the dagger from hotbar without help (pressed 1)
+    - lot of awkward hand alternating with controls
+    - compulsively picking up, equipping items
+        - swapping an rearranging items even when their stats were the same
+        - judging items based on color, rather than stats? 
+            - thought a yellow item affected speed.
+        - eventually became seemingly annoyed whenever an item would drop, would check phone, look away, etc
+        - filled up entire inventory with garbage items
+    - thought vitality was different from HP
+    - seemed bored, playing to pass the time and be polite
+        - obv not a fan of the genre, but concerning nonetheless
+    - story seemed to amuse him at first, bore him as time went on
+    - said art was good, but "programming seems basic"
+        - not sure what this means, hurt though lol
+    - didn't understand why he couldn't pick up items two squares away
+    
+    takeaways: 
+        - ~early game is slow, easy, confusing, and boring~
+        - way too many chests
+        - need in-game tutorial
+        - shift click to auto-pickup items
+        - better indicator when item is too far away to be picked up
+        - needs to be possible to die in early levels
+        - early levels potentially should be a lot smaller?
+        - might want to prevent "ATT" items from being pure yellow
+        
+ - jeff (home) (8/25/19)
+    situation: friend, invited him to playtest
+        - 35 minutes, played four games, died at caves 2 or 3 each time
+        - most early tutorials in place, game was untuned, pretty hard
+    good:
+        - equipment and rotation tutorials worked!
+        - used item tooltips to decide what to replace when equip space ran out
+    neutral:
+        - scared of enemies at first, wouldn't fight anything
+        - used mouse + inventory hotbar button to open inventory thereafter
+    bad:
+        - pressed arrow keys before "[WASD]" message appeared, used them throughout
+        - had to instruct how to use potions (tried dragging it onto player)
+            - didn't really get to see tutorial text because it was on mouse while trying to use it.
+        - often tried moving items via drag-n-drop instead of click-move-click
+        - rapidly mashed movement keys while fighting, didn't seem to grasp concept of turn-basedness
+            - kept doing it after i explained why it wasn't necessary, kept doing it anyways
+            - perhaps more of a mental tic in response to stress
+        - ran past enemies even whenever possible, causing him to recieve no potions and die in later levels
+        - didn't realize you could attack enemies by running into them
+        - struggled to equip dagger
+            - tried dragging it onto player
+            - tried right-clicking it in inventory
+            - confused about what "Throwable" meant
+            - had to instruct how to select it (there's no in-game explanation for this currently)
+        - noticed Zzz's on enemies, but didn't understand what it meant or how to take advantage
+            - even after explanation and demonstration, couldn't (immediately~) start fighting slow enemies safely 
+        - never tried hovering over enemies to see stats
+        
+    takeaways:
+        - need to streamline the way weapons are equipped. 
+            - it should *just work* when you put a weapon into the equipment grid
+            - only two attacks available, and a maximum of two weapons equipped
+        - there should be a way to recover life at the end of a level
+        - drag-n-drop should work
+        - disable arrow keys as default controls, it just screws people up
+        - need some non-enemy challenges in early levels, to introduce the movement and turn system
+        - clicking a potion onto yourself should probably just use it~
+        - clicking an equipment onto yourself should equip it if possible
+        
+        
+[beta testing notes]
+
+  date:      1/23/2020
+  
+  situation: all done remotely on version 0.1.1-BETA , when I asked for 
+             volunteers on twitter. sent out private DL links. was mostly
+             interested in whether the game would run for everyone.
+  - jonny
+    - said it was fun, strategic, challenge to get past the first area
+    - enjoyed filling up the grid
+    - gathered many knives lol
+    - said mary explained fighting well
+        - (i had given some guidance prior to that)
+    - liked the town! talked to the ppl!
+  
+  - alex
+    - chrome & windows both popped 'suspicious file' warnings
+        - we must end the tyranny of microsoft and google
+    - liked the ASCII map
+    - read info.txt before playing, which inspired several strange ideas:
+        - thought 'jumping' was a seperate action, that wasn't included in controls menu
+        - thought clicking was the prefered way to attack, and running into things was wrong
+        - thought filling the grid would do something special 
+            - (mostly my fault for jokingly implying it would, lol)
+        - tutorials were annoying, because things like opening the map etc. had already been done
+            - in a previous run, so the tutorial skip detection didn't work
+    - died once (I think) before spider zone
+        - "feels like I'm playing wrong"
+    - liked spider music, general look & feel, checkpoint design
+    - swamps are a big difficulty spike
+        - "dying too much"
+    - likes the turn counter on load menu
+    - ended up pretty underpowered at the swamps, unable to make much progress
+        - no potions
+        - att: 6, def: 2, vit: 9
+    - quit at that point
+    - all in all, didn't seem to enjoy the game very much
+            
+  - dk
+    - runs well on his potato
+    - got to the swamps
+        - quit to get dinner
+    - came back
+    - slugs were tough
+        - is it optimistic to assume players won't get hit by slugs?
+    - it FAILED TO SAVE
+        - could still continue from checkpoints (good)
+        - but no save_data directory was ever created
+        - after flipping the read-only flag on the 'Skeletris' folder it became fixed?
+        - although that shouldn't matter
+        - unclear if he restarted the game after flipping the box to make it work or what
+        - the real issue here is that there's no way to diagnose this problem remotely
+    - went silent as we were investigating the saving issue
+    
+  - necro
+    - runs well, likes the feel
+    - didn't play too long, enjoyed it though
+    - claimed to quit for IRL reasons
+    
+  - av reference
+    - sent me a very detailed list of his thoughts, super helpful:
+
+        "Hi there! I downloaded and successfully run the game on Windows 10. 
+         Here are some considerations after some time playing; I arrived to 
+         the first save point and the swamps."
+
+        "1. I like the graphic and music very much but if you are planning to 
+            sell it some people would aspect more atmosphere and details."
+        "2. I found some fx sounds to be slightly louder, like when you are hit 
+            by an enemy or when you heal with a potion."
+        "3. The game runs smooth; custom controls are perfect as some people like 
+            me prefer to use arrows rather than wasd."
+        "4. The idea of fitting items like a puzzle is very nice."
+        "5. Why would you skip a turn? There seems to be a lack of information 
+            about that. The jump is cute!"
+        "6. I like the map; sometimes it didn't show the doors, other times it 
+            did with a O."
+        "7. The saved data load perfectly."
+        
+        - beginning isn't engaging enough
+            - should think about improving this post-release
+            
+        - should dial back the potion / damage sounds a bit perhaps?
+            - reduce default sound effects volume?  (FIXED in v0.1.3-BETA)
+            
+        - improve mary's dialog to include some info about turn skipping?
+            - or put some info in the store page
+            - if players can't learn this they'll likely be unable to progress
+            
+        - likely some confusion about doors going away when they're opened
+            - tested to make sure and it seems to work correctly
+            - yep
+  
+  takeaways: 
+    - it ran well on everybody's computers!! (all used windows, I believe)
+        - except for DK whose game was failing to write anything to disk
+            - fixed by jibbling the 'read-only' checkbox on the folder??
+    - but people didn't seem to want to play for very long
+    - swamps was a major dropping off point
+        - not sure why though, exactly
+            - crabs, ghasts, and cyclopses, might be a bit much (FIXED? by v0.1.2)
+    - remote "playtesting" is so bad compared to in-person
+        - obviously...
+    - need better handling for when the game is unable to write to disk
+        - logging wouldn't help here (can't write logs either...)
+        - pop a message with the stacktrace to the screen maybe?
+            - when? at save time?
+            - this is so messy
+        - can instruct people to run the game the game through a terminal, take screenshot
+          of stacktrace in console if necessary
+    - game data should be be saved to the OS's AppData folder, not the working directory (FIXED by v0.1.3)
+        - this is likely the root cause of DK's saving issue
+        - although it's unclear why it couldn't write to the desktop or why
+          closing and reopening the game fixed those issues...
+          

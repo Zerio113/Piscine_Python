@@ -1,0 +1,287 @@
+                      
+                        *------------------------*
+                        | Skeletris Planning Doc |
+                        *------------------------*
+                      
+[P1 bugs]
+ - there many issues with fullscreening if you have multiple monitors
+    - it's not really supported by pygame / SDL (are you kidding me?!)
+
+[P2 bugs]
+ - if you've ever drank a potion, it shouldn't pop the potion tutorial
+    - the tutorial can basically get blocked by the equipment one
+ - crash files go to the working dir (maybe that's fine?)
+    - it's the most convenient place (if i want people to find & send me them)
+    - but it could fail if the directory is restricted
+ - if you have a high score, but no in-progress save files, the "load" option still appears
+    - same problem w/ high scores
+    - not sure if I want to parse the files on game start
+        - what if you have a crazy number of them?
+ - telling potions apart is probably impossible for colorblind people
+ - on mac, when you adjust the window's size it also snaps to the center
+ - saving system isn't explained anywhere in the game
+    - people are quitting out of zones and expecting it to auto-save I guess?
+        
+[story bugs]
+ 
+[sound bugs]
+ - frog song could use a bit of remastering
+      
+        
+[current features]
+ - maybe before vault too?
+ - mention right-click to pickup on itch page
+    - eh, probably not necessary?
+ 
+[next features]
+  - shift + direction should force a walk action, even if there's a target in that direction
+    - (more secret key commands?)
+  - having an item on the cursor shouldn't prevent you from attacking
+    - this gets in the way a lot when you're weapon swapping mid-fight
+
+
+[testing]
+
+
+[balance issues]    
+ - players can quite easily forget how to rotate items or skip turns
+    - realistically, they can just look at the store page / controls menu
+ - slow potions are a bit OP against bosses
+    - maybe OK? bosses are pretty tough otherwise...
+ - weapon drops become extremely common at the later difficulties because
+   all of them are in the loot pool
+  
+
+[maintanence]
+ - fix up project requirements. can probably update all the dependencies (even python)
+    - why though?
+ 
+ 
+[what's stressing me out?]
+ - won't ever finish
+    - potentially true. it's up to you
+ - "it took you X years to make this?"
+    - it's hard to predict reception. don't let it paralyze you.
+ - new players will struggle and quit
+    - you'll playtest the tutorial system before release, and you might be 
+        surprised at how well players can figure this stuff out.
+ - boss fights aren't very interesting
+    - you weren't even supposed to *have* those in the first place, remember? 
+        just having them at all is more interesting than not, and they don't 
+        necessarily need to play a huge role in the game to be memorable.
+    - also they're actually better than they seem
+        - frog boss tests the player's ability to sidestep attacks
+        - robot boss tests player's ability to use CC
+ - none of it's very interesting
+    - done is better than interesting
+    
+ 
+[architecture]
+    - entities should keep a reference to the world they're in
+        - instead of passing the world into literally every method
+    
+    
+[content design philosophy]
+    - done is better than good
+    - but if it's bad cut it
+    - after two tries, move on
+    
+        
+[future features]
+ - mary doesn't have repeat dialog at many places
+ - better death animations for enemies
+    - i was looking through old gifs, and i swear they used to be better
+    - can probably generate some "falling down" animations based on the enemy's sprite
+        - sorta like i did in 'HATE', where they'd desintigrate
+ - alternate ending for deathless / cp-less runs
+    - fight the cloning machine? lol
+ - when you go "back" to a previous menu, you should return to the same selected idx
+ - [WASD to move] tutorial doesn't look good
+    - honestly it's probably fine
+    - render it underneath the player maybe?
+ - traps / ground effects
+    - not sure how much sense this makes, given that enemies can already block you pretty fiercely
+ - enemies picking up items (intelligence >= 4)
+    - we'd want an "arms up" sprite for eligible enemies I think
+ - holding the up/down key in menus should continue scrolling
+    - careful, the hold-down behavior on keys differs between OSes
+        - (meaning this might already be a thing on windows / mac)
+ - projectiles should get a color based on the item/status or something
+ - tiles that alter movement
+    - jump / teleport tiles
+        - an interesting way to get away from enemies, assuming they don't follow you
+        - could use "ReturnExitEntity" sprites for this
+            - although tests have shown people are afraid of it..
+        - this also makes the maps a lot more "mazy" and harder to visualize
+    - ice tiles
+        - these would be interesting to try to generate
+        - enemy pathing on these would be a bit tricky / interesting
+    - water tiles (kill or hurt you when you fall in)
+        - only meaningful if knockback is a thing
+    - one-way tiles
+        - (not sure what these would be good for, honestly.)
+            - force engagement?
+                - running away is sorta hopeless already
+                    - and turtling in doorways only works if you can facetank the enemy
+ - new (secondary) item stats
+    - poison duration
+    - confusion duration
+ - quest system
+ - permanent effects (aka curses)
+    - only fun if it truly changes your options somehow
+    - and it's obligitory to have different art
+ - doors that can only be unlocked with "keys"
+ - more varied scenery
+    - bridges over deep pits, water pits
+ 
+ - make enemies move at the same time as you...?
+    - this would be my #1 complaint with the game if I were a player
+    - there's a reason why all other roguelikes do this...
+    - this will require a lot of work though
+        - essentially:
+            - gets complicated when enemies are taking multiple actions during a single player turn
+            - we actually don't even know in advance how many total steps will be taken by enemies during this phase
+                - depends on various speed-affecting actions that may or may not be taken
+            - so it seems like we'd have to pre-compute the entire phase, and play it back at the proper speed
+            - actually, it might not be so bad if only MoveActions are affected
+                - but I want to be able to toggle other things too.
+            - actually, if we could represent the worldstate (as it pertains to actors) in more abstract way..
+            - HMMM
+            
+            - Plan A
+                - player chooses an action A0.
+                - take a snapshot S0 of the current worldstate (or a relevant part of it)
+                - compute S1 = A0(S0) (the worldstate after the player's action has resolved)
+                - compute the first enemy's action A1 given S1, and let S2 = A1(S1)
+                    - if A_e1 is non-concurrent, animate Ap, then A1
+                    - else find A2, A3, A4, and so on until a non-concurrent action is found 
+                        - or until it's the player's turn again
+                        - hidden enemies do not animate, and therefore their actions are always concurrent
+                        - if the player is gone (AKA dead), all actions are non-concurrent
+                        
+                - then: during animation, sort the actions into lists for each actor
+                - and animate them concurrently 
+                    - increasing the anim rate for longer lists so that all animations finish at the same time.
+                    
+            - issues with Plan A:
+                - how to represent the state of an actor?
+                    - position
+                    - HP
+                    - energy
+                    - base stats
+                    - list of stat modifiers (with X turns remaining)
+                        - this basically includes items and status effects
+                        
+                - how to handle 'unusual actions' like interacting with scenery or talking to an NPC?
+                    - have them be "non-concurrent" and skip this entire process
+                - how to update the 'true' worldstate after the animation phase has occurred?
+                    - just finalize actions as they occur (mid-animation)?
+                        - no, they absolutely must be called in order
+                    - do a "full finalize" of the world at the end?
+                    - refactor current world to have it basically represented this way to begin with
+                        - aka decouple the model from the view
+                
+ - use N "dividers" on HP bar where N = max health
+ 
+ - when enemies are "flinched" it should be shown to the player somehow
+    - in the tooltip?
+    - this should be done with pink zees I think, and other status effects should have similar effects
+        - or just regular zees?
+        - or just flash the status's color...?
+    
+
+[rejected future features]
+ - consider allowing two weapons to be equipped at maximum
+    - there currently is almost no reason to have more than 1, let alone two
+    - this would allow for a simpler UI
+        - you'd have an active / offhand weapon, and a button to swap
+    - would allow weapons to have global stats (not currently possible because 
+      it'd become more efficient to stack small weapons instead of cubes)
+    - would need to elegantly "fail to equip" somehow
+ 
+ - putting skeletons back together with bone pieces
+ 
+ - figure out how to make 32-bit windows builds
+    - download 32-bit python and dependencies and fire away?
+    - could also consider only shipping 32 bit exes?
+        - i think this is normal way, yeah
+        - it's 2020, time to let 32-bit die...
+  
+
+[~dream features~]
+ - farming
+    - if you can dream it you can meme it
+ 
+ 
+[P3 bugs / won't fix]
+    - going in and out of fullscreen mode loses the window position (or something like that?)
+    - offscreen light sources that are somewhat nearby will make offscreen enemies act non-instantly
+        - for now, let's just not have any enemies that emit light by default
+            - oops, tree boss emits light...
+    - HP on kill doesn't trigger when you kill an enemy with poison
+        - I think this makes the game better. leave it.
+            - It also doesn't go towards kill count, which makes peaceful runs possible (I think~)
+    - as frog boss is leaping diagonally, it'll activate player's attack targeting squares
+    - right clicking a potion in the equipment grid moves it to the inventory (it should consume)
+        - should it?
+    - if you have temporary speed boost that's about to expire, enemies with z's can act after you move
+        - need to math a little harder here (or just leave it...)
+    - windows freaks out when you try to run the exe (how do I authorize it?)
+        - it seems like the only way around this is to get a digital certificate,
+          which costs hundreds of dollars and requires me to be a company?
+        - this is kind of a non-starter
+             
+
+[game name]
+
+    [CAN'T USE] Cubelike 
+        - blend of roguelike and "cube" (?)
+        - been using this as the name since the beginning
+        - don't really want to use word "Cube" because it's awkward to say/hard to hear
+            - "it's called kyubelike"
+            - what?
+            - "it's cube-like, like roguelike, if you pronounce it wrong"
+    
+    Skeletris
+        - pros:
+            - sounds cool
+            - available
+            - this can also be the name of the city in which the game takes place
+        - cons:
+            - similar to "Dungetris" which is an existing indie tetris-roguelike fusion
+                - games are totally different though, probably fine to use
+            - says basically nothing about the game except "there are skeletons + tetris"
+            - there are like four ppl using this name on social media accounts
+                - sorry kids, it's mine now
+    
+    Slap Monsters, Find Loot
+        - cute, memorable, 2nd half needs work
+        - hate the word "loot"
+        - SMFL = "ess em eff ell" sucks
+        
+    Slap Monster, Get Treasure
+        - pros:
+            - SMGT = "ess em gee tee", pretty good, acronym available
+            - sounds like lgbt
+            - describes all important parts of the game
+        - cons:
+            - ambiguously necessary comma
+            - ambiguously necessary "s" after Monster
+            - it's too stupid
+            - one day later, i hate it
+            
+    [CAN'T USE] Tomb of the Mushroom King
+        - cons:
+            - identical to "Crypt of the Fungal Lord", which exists
+            - similar to "Curse of the Mushroom King", which exists
+            
+            
+A remnant of the past:
+
+   "Note: The game is quite difficult, and it's probably not for everyone. 
+   If you become surrounded or get hit by something nasty, you'll likely 
+   die. And have to start over. The idea is that each death will teach a 
+   lesson, and as those lessons are learned, you'll stop getting hit and 
+   the game will feel more fair and satisfying :)"
+
+            
