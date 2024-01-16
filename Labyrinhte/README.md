@@ -1,4 +1,4 @@
-# Skeletris
+# LABITErinte
 A turn-based dungeon crawler with a spooky theme and lots of pixelart.
 
 This project has been released! [itch.io](https://ghastly.itch.io/skeletris)

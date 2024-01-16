@@ -11,7 +11,7 @@ _USE_WORKING_DIR_FLAG_NAME = "put_save_data_here.txt"
 _SAVE_DATA_DIR = "save_data"
 
 _MY_NAME = "Ghast"
-_GAME_NAME = "Skeletris"
+_GAME_NAME = "LABITErinte"
 
 
 def use_workingdir_for_save_data(force_reload=False):

@@ -7,7 +7,7 @@ import pathlib
 The main entry point.
 """
 
-NAME_OF_GAME = "Skeletris"
+NAME_OF_GAME = "LABITErinte"
 
 
 def _get_crash_report_file_name():
