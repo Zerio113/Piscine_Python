@@ -47,7 +47,8 @@ gold_img = load_img("assets/images/block0.png", False)
 bow_img = load_img("assets/images/Bow.png", False)
 arrow_img = load_img("assets/images/Arrow.png", False)
 bomb_img = load_img("assets/images/Bomb.png", False)
-gold_img = load_img("assets/images/Gold.png", False)
+#parchemin_img = load_img("assets/images/Gold.png", False)
+gold_img = load_img("assets/images/Parchemin.png", False)
 
 skeleton_imgs = [load_img("assets/images/skeleton/Skeleton1.png", True), 
 load_img("assets/images/skeleton/Skeleton2.png", True), 

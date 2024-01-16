@@ -31,8 +31,6 @@ shadows.set_alpha(80)
 pygame.display.set_caption(TITLE)
 prev_time = time.time()
 
-
-
 block_dict = {
 "block0": gold_img,
 "block1": block1, 
@@ -71,7 +69,7 @@ screen_shake = 0
 
 portal_animation_index = 0
 
-FPS_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 40)
+FPS_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 SMALL_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 
 start_time = time.time()
@@ -149,16 +147,16 @@ while menu:
             if event.button == 1:
                 clicking = False'''
 
-    main_menu_text = framework.render_fps_font(FPS_FONT, "Down The Mineshaft")
+    main_menu_text = framework.render_fps_font(FPS_FONT, "MAZE THE GIMS")
     display.blit(main_menu_text, (42, 20))
 
     framework.render_button(display, "Play", FPS_FONT, False, (255,255,255), (125, 100), clicking, play, True)
     #print(lighting)
     if lighting:
-        framework.render_button(display, "E to disable lighing", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_off, False)
+        framework.render_button(display, "E to disable lightning", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_off, False)
 
     if not lighting:
-        framework.render_button(display, "E to enable lighing", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_on, False)
+        framework.render_button(display, "E to enable lightning", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_on, False)
     clicking = False
 
 
@@ -444,8 +442,11 @@ while not menu:
         if bullet[3] <= 0:
             enemy_bullets.remove(bullet)
 
-    gold_count_text = framework.render_fps_font(FPS_FONT, f"Gold: {gold_count}/{gold_per_level[map_index]}")
-    display.blit(gold_count_text, (10,10))
+    gold_count_text = framework.render_fps_font(FPS_FONT, f"Parchemins: {gold_count}/{gold_per_level[map_index]}")
+    display.blit(gold_count_text, (10, 10))
+
+    gold_count_text = framework.render_fps_font(FPS_FONT, f"Vies: {gold_count}/{gold_per_level[map_index]}")
+    display.blit(gold_count_text, (10, 30))
 
     if screen_shake > 0:
         screen_shake -= 1
