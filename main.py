@@ -352,12 +352,6 @@ while not menu:
 
     framework.handle_particles(display, scroll)
 
-    if map_index == 0:
-        text = framework.render_fps_font(SMALL_FONT, "Hunt for the gold")
-        display.blit(text, (150-scroll[0], 100-scroll[1]))
-
-        text2 = framework.render_fps_font(SMALL_FONT, "Click to fire bomb")
-        display.blit(text2, (80-scroll[0], -50-scroll[1]))
 
     if dead:
         death_count_text = framework.render_fps_font(FPS_FONT, f"Deaths: {death_count} Enter to restart...")
