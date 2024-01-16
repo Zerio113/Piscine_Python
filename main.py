@@ -165,6 +165,7 @@ while menu:
     pygame.display.flip()
     CLOCK.tick(FPS)
 
+    death_count = 0
 
 
 while not menu:
@@ -205,6 +206,7 @@ while not menu:
                 #x, y, x_vel, y_vel, gravity, radius
                 particles.append([player.x+random.randrange(-3, 3)-scroll[0], player.y+random.randrange(0, 10)-scroll[1], random.randrange(-3, 3), 10, 3, random.choice([(232, 123, 67), (245, 161, 93)])])
             has_spawned_death_particles = True
+            death_count += 1  # Ajoutez cette ligne pour incrémenter death_count
 
 
     
@@ -364,9 +366,8 @@ while not menu:
         display.blit(text2, (80-scroll[0], -50-scroll[1]))
 
     if dead:
-        
-        text3 = framework.render_fps_font(FPS_FONT, "Dead, Enter to restart...")
-        display.blit(text3, (20, 100))
+        death_count_text = framework.render_fps_font(FPS_FONT, f"Deaths: {death_count} Enter to restart...")
+        display.blit(death_count_text, (20, 100))
 
 
     start_time += dt*5
