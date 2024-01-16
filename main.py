@@ -399,6 +399,7 @@ while not menu:
                 #x, y, x_vel, y_vel, gravity, radius
                 particles.append([g[0]+random.randrange(-20, 20), g[1]+random.randrange(-10, 10), random.randrange(-3, 3), 3, 2, (255, 184, 74)])
             gold_count += 1
+            player.health += 1  # Increase player's health
         g[1] += np.sin(start_time)/5
         display.blit(gold_img, (g[0]-scroll[0], g[1]-scroll[1]))
 
@@ -434,14 +435,18 @@ while not menu:
         bullet[3] -= 1
         pygame.draw.circle(display, (212, 30, 60), (bullet[0]-scroll[0], bullet[1]-scroll[1]), 2)
 
-        if pygame.Rect(bullet[0]-scroll[0]-2, bullet[1]-scroll[1]-2, 4, 4).colliderect(player.player_rect.x-scroll[0], player.player_rect.y-scroll[1],
-        player.player_rect.width, player.player_rect.height):
-            if not dead:
+        if pygame.Rect(bullet[0] - scroll[0] - 2, bullet[1] - scroll[1] - 2, 4, 4).colliderect(
+                player.player_rect.x - scroll[0], player.player_rect.y - scroll[1], player.player_rect.width,
+                player.player_rect.height):
+            player.health -= 1
+
+            if player.health <= 0 and not dead:
                 framework.play_sound("assets/sound_effects/player_death.wav")
                 screen_shake = 10
                 dead = True
+            enemy_bullets.remove(bullet)
 
-
+            break
         if bullet[3] <= 0:
             enemy_bullets.remove(bullet)
 

@@ -27,8 +27,8 @@ class Player:
         self.rotation = 0
         self.jumping = False
         self.scale = [18, 27]
+        self.health = 3  # starting health
 
-        
 
 
 
