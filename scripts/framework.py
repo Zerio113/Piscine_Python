@@ -201,7 +201,7 @@ def flame_effect(display, entity, shadows, scroll, sine):
 def render_button(display, text, font, bold, color, position, clicking, func, thing):
     text = font.render(text, bold, color)
     text_rect = get_text_rect(text)
-    text_rect.height -= 10
+    text_rect.height -= 5
     text_rect.center = (position[0]+text_rect.width/2, position[1]+text_rect.height/2)
 
     display.blit(text, position)

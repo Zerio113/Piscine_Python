@@ -31,8 +31,6 @@ shadows.set_alpha(80)
 pygame.display.set_caption(TITLE)
 prev_time = time.time()
 
-
-
 block_dict = {
 "block0": gold_img,
 "block1": block1, 
@@ -71,7 +69,8 @@ screen_shake = 0
 
 portal_animation_index = 0
 
-FPS_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 40)
+FPS_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
+FPS_FONT_HIGH = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 60)
 SMALL_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 
 start_time = time.time()
@@ -149,17 +148,10 @@ while menu:
             if event.button == 1:
                 clicking = False'''
 
-    main_menu_text = framework.render_fps_font(FPS_FONT, "Down The Mineshaft")
-    display.blit(main_menu_text, (42, 20))
+    main_menu_text = framework.render_fps_font(FPS_FONT, "MAZE THE GIMS")
+    display.blit(main_menu_text, (110, 25))
 
-    framework.render_button(display, "Play", FPS_FONT, False, (255,255,255), (125, 100), clicking, play, True)
-    #print(lighting)
-    if lighting:
-        framework.render_button(display, "E to disable lighing", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_off, False)
-
-    if not lighting:
-        framework.render_button(display, "E to enable lighing", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_on, False)
-    clicking = False
+    framework.render_button(display, "Play", FPS_FONT_HIGH, False, (255,255,255), (115, 80), clicking, play, True)
 
 
     SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
@@ -438,20 +430,24 @@ while not menu:
         if pygame.Rect(bullet[0] - scroll[0] - 2, bullet[1] - scroll[1] - 2, 4, 4).colliderect(
                 player.player_rect.x - scroll[0], player.player_rect.y - scroll[1], player.player_rect.width,
                 player.player_rect.height):
-            player.health -= 1
 
             if player.health <= 0 and not dead:
                 framework.play_sound("assets/sound_effects/player_death.wav")
                 screen_shake = 10
                 dead = True
             enemy_bullets.remove(bullet)
+            screen_shake = 5
+            player.health -= 1
 
             break
         if bullet[3] <= 0:
             enemy_bullets.remove(bullet)
 
-    gold_count_text = framework.render_fps_font(FPS_FONT, f"Gold: {gold_count}/{gold_per_level[map_index]}")
-    display.blit(gold_count_text, (10,10))
+    gold_count_text = framework.render_fps_font(FPS_FONT, f"Parchemins: {gold_count}/{gold_per_level[map_index]}")
+    display.blit(gold_count_text, (10, 10))
+
+    gold_count_text = framework.render_fps_font(FPS_FONT, f"Vies: {player.health}/3")
+    display.blit(gold_count_text, (10, 30))
 
     if screen_shake > 0:
         screen_shake -= 1
