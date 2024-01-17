@@ -30,7 +30,6 @@ shadows.set_alpha(80)
 
 pygame.display.set_caption(TITLE)
 prev_time = time.time()
-
 block_dict = {
 "block0": gold_img,
 "block1": block1, 
@@ -75,6 +74,9 @@ SMALL_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 
 start_time = time.time()
 begin = time.time()
+current_time = 0
+max_time = 300
+
 
 entities = []
 
@@ -187,6 +189,17 @@ while not menu:
     now = time.time()
     dt = now - prev_time
     prev_time = now
+
+    if not dead:
+        current_time += dt
+    
+        if current_time >= max_time:
+            dead = True
+    
+    else:
+        death_count += 1
+        start_time = time.time()
+        current_time = 0
 
     tile_rects = framework.render_tiles(display, scroll, tiles, [player.player_rect.x-scroll[0], player.player_rect.y-scroll[1]], block_dict)
     #for tile in tile_rects:
