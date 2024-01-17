@@ -40,10 +40,13 @@ block11 = load_img('assets/images/Connecter2.png', False)
 block12 = load_img('assets/images/Connecter3.png', False)
 block13 = load_img('assets/images/Connecter4.png', False)
 block16 = load_img('assets/images/door.png', False)
+block17 = load_img('assets/images/heart.png', False)
 
 torch_img = load_img("assets/images/torch.png", False)
 
 gold_img = load_img("assets/images/block0.png", False)
+teleport_gold_img = load_img("assets/images/block0.png", False)
+
 potion_img = pygame.image.load('assets/images/Bomb.png').convert_alpha()
 
 
@@ -52,6 +55,8 @@ arrow_img = load_img("assets/images/Arrow.png", False)
 bomb_img = load_img("assets/images/Bomb.png", False)
 #parchemin_img = load_img("assets/images/Gold.png", False)
 gold_img = load_img("assets/images/Parchemin.png", False)
+teleport_gold_img = load_img("assets/images/Parchemin.png", False)
+
 
 skeleton_imgs = [load_img("assets/images/skeleton/Skeleton1.png", True), 
 load_img("assets/images/skeleton/Skeleton2.png", True), 
