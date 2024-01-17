@@ -42,6 +42,10 @@ def load_map(map_name):
             gold.append([int(_[0]), int(_[1])-350])
 
             blocks.remove(_)
+        if _[2] == "block16": #If the block is long grass
+            teleport_golds.append([int(_[0]), int(_[1])-350])
+
+            blocks.remove(_)
 
     return blocks, lights, gold, enemies, teleport_golds
 

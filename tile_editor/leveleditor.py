@@ -16,7 +16,7 @@ win = engine.SetWindow(1600, 900, pygame.RESIZABLE, 1)
 blockSurface = engine.SetSurface(1280, 736)
 
 # Sprites
-block0 = engine.LoadImage(os.path.join('data', 'sprite', 'block0.png'))
+block0 = engine.LoadImage(os.path.join('data', 'sprite', 'Gold.png'))
 
 block1 = engine.LoadImage(os.path.join('data', 'sprite', 'BottomCornerLeft.png'))
 block2 = engine.LoadImage(os.path.join('data', 'sprite', 'BottomCornerRight.png'))
@@ -36,7 +36,7 @@ block13 = engine.LoadImage(os.path.join('data', 'sprite', 'Connecter4.png'))
 block14 = engine.LoadImage(os.path.join('data', 'sprite', 'torch.png'))
 
 block15 = engine.LoadImage(os.path.join('data', 'sprite', 'Skeleton1.png'))
-block16 = engine.LoadImage(os.path.join('data', 'sprite', 'door.png'))
+block16 = engine.LoadImage(os.path.join('data', 'sprite', 'tp.png'))
 block18 = engine.LoadImage(os.path.join('data', 'sprite', 'door.png'))
 block17 = engine.LoadImage(os.path.join('data', 'sprite', 'heart.png'))
 

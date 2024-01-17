@@ -44,11 +44,14 @@ block_dict = {
 "block11": block11, 
 "block12": block12, 
 "block13": block13,
-"block17": teleport_gold_img
+"block16": teleport_gold_img,
+"block17": hearth_img
 }
 
 maps = ["assets/maps/level1.txt","assets/maps/level2.txt", "assets/maps/level3.txt", "assets/maps/level4.txt"]
-gold_per_level = [3, 6, 3, 6]
+gold_per_level = [3, 999, 3, 999]
+teleport_gold_per_level = [999, 1, 999, 1]
+teleport_gold_count = 0
 gold_count = 0 
 map_index = 0
 tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
@@ -76,6 +79,7 @@ start_time = time.time()
 begin = time.time()
 current_time = 0
 max_time = 200
+max_time_per_level = [200, 50, 400, 50]
 
 entities = []
 
@@ -121,7 +125,16 @@ def fancy_lighting_off():
     lighting = False
     print(lighting)
 
-
+def star_wars_crawl(display, text, speed):
+    font = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 35)
+    text_surface = font.render(text, True, (255, 255, 255))
+    text_rect = text_surface.get_rect(center=(150, 233.33))
+    while text_rect.y > -text_surface.get_height():
+        display.fill((0, 0, 0))
+        display.blit(text_surface, text_rect)
+        pygame.display.flip()
+        text_rect.y -= speed
+        pygame.time.wait(100)
 
 def fancy_lighting_on():
     global lighting
@@ -187,21 +200,9 @@ while not menu:
     dt = now - prev_time
     prev_time = now
 
-    remaining_time = max_time - current_time
+    remaining_time = max_time_per_level[map_index] - current_time
     remaining_time = int(remaining_time)
 
-    if not dead:
-        remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
-        display.blit(remaining_time_text, (10, 50))
-        current_time += dt
-
-        if current_time >= max_time:
-            dead = True
-
-    else:
-
-        start_time = time.time()
-        current_time = 0
 
     tile_rects = framework.render_tiles(display, scroll, tiles, [player.player_rect.x-scroll[0], player.player_rect.y-scroll[1]], block_dict)
     #for tile in tile_rects:
@@ -258,6 +259,7 @@ while not menu:
 
                 player = player_.Player(100, 100, 4)
                 gold_count = 0
+                teleport_gold_count = 0
                 circle_radius = 30
                 dead = False
                     
@@ -335,33 +337,51 @@ while not menu:
         if circle[3] <= 1:
             circles.remove(circle)
         pygame.draw.circle(display, random.choice([(221, 66, 70), (223, 214, 138)]), (circle[0]-scroll[0], circle[1]-scroll[1]), circle[2], circle[3])
-                    
-    if int(gold_count) >= gold_per_level[map_index]:
 
-        if map_index != 3:
-            circle_radius += circle_radius//12
-            pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
+    if map_index == 0 or map_index == 2:
+        if int(gold_count) >= gold_per_level[map_index]:
 
-            if circle_radius > 300:
+                circle_radius += circle_radius//12
+                pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
+                current_time = 0  # Réinitialisez le timer
+                if circle_radius > 300:
 
-                map_index += 1
-                tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
-                entities = []
-                enemies = []
-                for enemy in enemys:
-                    enemies.append(FlyingEnemy(enemy[0], enemy[1], "FlyingEnemy"))
+                    map_index += 5
+                    tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
+                    entities = []
+                    enemies = []
+                    for enemy in enemys:
+                        enemies.append(FlyingEnemy(enemy[0], enemy[1], "FlyingEnemy"))
 
-                player = player_.Player(100, 100, 4)
-                gold_count = 0
-                circle_radius = 30
+                    player = player_.Player(100, 100, 4)
+                    gold_count = 0
+                    teleport_gold_count = 0
+                    circle_radius = 30
 
-        else:
-            circle_radius += circle_radius//12
-            pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
-            FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 35)
-            text4 = framework.render_fps_font(FONT, "You Win! Thanks for playing")
-            display.blit(text4, (24, 100))
-                    
+    if map_index == 1 or map_index == 3:
+        print(teleport_gold_count)
+        if int(teleport_gold_count) >= teleport_gold_per_level[map_index]:
+            circle_radius += circle_radius // 12
+            pygame.draw.circle(display, (0, 0, 0), (300 // 2, 233.33 // 2), circle_radius)
+            map_index += 1
+            current_time = 0  # Réinitialisez le timer
+            tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
+            entities = []
+            enemies = []
+            for enemy in enemys:
+                enemies.append(FlyingEnemy(enemy[0], enemy[1], "FlyingEnemy"))
+
+            player = player_.Player(100, 100, 4)
+            gold_count = 0
+            circle_radius = 30
+
+    elif map_index == 4:
+        circle_radius += circle_radius//12
+        pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
+        FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 35)
+        star_wars_crawl(display, "You Win! Thanks for playing", 1)
+
+
     '''fps = str(int(CLOCK.get_fps()))
     fps_text = framework.render_fps_font(FPS_FONT, fps)
     display.blit(fps_text, (25,25))'''
@@ -433,7 +453,7 @@ while not menu:
             for x in range(30):
                 #x, y, x_vel, y_vel, gravity, radius
                 particles.append([t[0]+random.randrange(-20, 20), t[1]+random.randrange(-10, 10), random.randrange(-3, 3), 3, 2, (255, 184, 74)])
-            map_index += 1
+            teleport_gold_count += 1
         t[1] += np.sin(start_time)/5
         display.blit(teleport_gold_img, (t[0]-scroll[0], t[1]-scroll[1]))
 
@@ -485,15 +505,27 @@ while not menu:
         if bullet[3] <= 0:
             enemy_bullets.remove(bullet)
 
-    gold_count_text = framework.render_fps_font(FPS_FONT, f"Parchemins: {gold_count}/{gold_per_level[map_index]}")
-    display.blit(gold_count_text, (10, 10))
+    if map_index == 0 or map_index == 2:
+        gold_count_text = framework.render_fps_font(FPS_FONT, f"Parchemins: {gold_count}/{gold_per_level[map_index]}")
+        vies_count_text = framework.render_fps_font(FPS_FONT, f"Vies: {player.health}/3")
 
-    gold_count_text = framework.render_fps_font(FPS_FONT, f"Vies: {player.health}/3")
-    display.blit(gold_count_text, (10, 30))
+        display.blit(gold_count_text, (10, 10))
+        display.blit(vies_count_text, (10, 30))
+
+    elif map_index == 1:
+        portal_text = framework.render_fps_font(FPS_FONT, f"Find the portal")
+        display.blit(portal_text, (10, 10))
 
     if screen_shake > 0:
         screen_shake -= 1
 
+    if not dead:
+        remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
+        display.blit(remaining_time_text, (10, 50))
+        current_time += dt
+
+        if current_time >= max_time_per_level[map_index]:
+            dead = True
     #Update Screen--------------------------------------------------
 
     SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
