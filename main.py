@@ -75,7 +75,7 @@ SMALL_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 start_time = time.time()
 begin = time.time()
 current_time = 0
-max_time = 300
+max_time = 5
 
 
 entities = []
@@ -197,7 +197,7 @@ while not menu:
             dead = True
     
     else:
-        death_count += 1
+        
         start_time = time.time()
         current_time = 0
 
