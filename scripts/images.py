@@ -44,6 +44,8 @@ block16 = load_img('assets/images/door.png', False)
 torch_img = load_img("assets/images/torch.png", False)
 
 gold_img = load_img("assets/images/block0.png", False)
+potion_img = pygame.image.load('assets/images/Bomb.png').convert_alpha()
+
 
 bow_img = load_img("assets/images/Bow.png", False)
 arrow_img = load_img("assets/images/Arrow.png", False)

@@ -1,3 +1,7 @@
+''''To anyone reading this, let me give you some context - This game was made a 5 day challenge, during those 5 days
+I was able to work on the game full-time and had many irl thing to do, the code is therefore a massive mess, I do apologize :(
+(also there are definitly bugs xD)'''
+
 import pygame
 import time
 from scripts.constants import *
@@ -27,11 +31,6 @@ shadows.set_alpha(80)
 pygame.display.set_caption(TITLE)
 prev_time = time.time()
 
-background_image = pygame.image.load("assets/images/pyragims1.jpg")  # Remplacez par le chemin de votre image
-#width, height = background_image.get_size()
-#display = pygame.display.set_mode((300, 233))
-
-
 block_dict = {
 "block0": gold_img,
 "block1": block1, 
@@ -46,14 +45,11 @@ block_dict = {
 "block10": block10,
 "block11": block11, 
 "block12": block12, 
-"block13": block13,
-"block16": block16,
+"block13": block13
 }
 
-
-
 maps = ["assets/maps/level1.txt","assets/maps/level2.txt", "assets/maps/level3.txt", "assets/maps/level4.txt"]
-gold_per_level = [6, 6, 3, 6]
+gold_per_level = [3, 6, 3, 6]
 gold_count = 0 
 map_index = 0
 tiles, lights, gold, enemys = framework.load_map(maps[map_index])
@@ -114,15 +110,9 @@ def play():
     global menu
     menu = False
 
-
 lighting = True
 
-def credit():
-    global menu
-    display.fill((15, 5, 36))  # Clear the display
-    credit_text = framework.render_fps_font(FPS_FONT, "Credits: Merci à l'équipe 7 composée de Gwendal, Yann, ElHadi, Noureddine et Thomas")
-    display.blit(credit_text, (50, 50))
-    back_button_rect = framework.render_button(display, "Retour au menu principal", FPS_FONT, False, (255, 255, 255),(135, 200), clicking, menu, True)
+
 
 def fancy_lighting_off():
     global lighting
@@ -137,8 +127,7 @@ def fancy_lighting_on():
     print(lighting)
 
 while menu:
-    display.blit(background_image, (0, 0))
-    #display.fill((15, 5, 36))
+    display.fill((17, 5, 36))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -154,21 +143,20 @@ while menu:
                 lighting = not lighting
                 print(lighting)
                 
-        if event.type == pygame.MOUSEBUTTONUP:
+        '''if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
-                clicking = False
+                clicking = False'''
 
     main_menu_text = framework.render_fps_font(FPS_FONT, "MAZE THE GIMS")
     display.blit(main_menu_text, (42, 20))
 
-    framework.render_button(display, "Jouer", FPS_FONT, False, (255,255,255), (135, 100), clicking, play, True)
-    framework.render_button(display, "Credit", FPS_FONT, False, (255, 255, 255), (35, 200), clicking, credit, True)
+    framework.render_button(display, "Play", FPS_FONT, False, (255,255,255), (125, 100), clicking, play, True)
     #print(lighting)
     if lighting:
-        framework.render_button(display, "E pour désactiver l'éclairage", FPS_FONT, False, (255,255,255), (90, 135), False, fancy_lighting_off, False)
+        framework.render_button(display, "E to disable lightning", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_off, False)
 
     if not lighting:
-        framework.render_button(display, "E pour activer l'éclairage", FPS_FONT, False, (255,255,255), (90, 135), False, fancy_lighting_on, False)
+        framework.render_button(display, "E to enable lightning", FPS_FONT, False, (255,255,255), (40, 135), False, fancy_lighting_on, False)
     clicking = False
 
 
@@ -351,7 +339,7 @@ while not menu:
             circle_radius += circle_radius//12
             pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
             FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 35)
-            text4 = framework.render_fps_font(FONT, "GG GROS BG!")
+            text4 = framework.render_fps_font(FONT, "You Win! Thanks for playing")
             display.blit(text4, (24, 100))
                     
     '''fps = str(int(CLOCK.get_fps()))
@@ -371,14 +359,14 @@ while not menu:
     framework.handle_particles(display, scroll)
 
     if map_index == 0:
-        text = framework.render_fps_font(SMALL_FONT, "Trouves les parchemins")
+        text = framework.render_fps_font(SMALL_FONT, "Hunt for the gold")
         display.blit(text, (150-scroll[0], 100-scroll[1]))
 
-        text2 = framework.render_fps_font(SMALL_FONT, "Clique pour tirer des bombes")
+        text2 = framework.render_fps_font(SMALL_FONT, "Click to fire bomb")
         display.blit(text2, (80-scroll[0], -50-scroll[1]))
 
     if dead:
-        death_count_text = framework.render_fps_font(FPS_FONT, f"Morts: {death_count} Entrer pour restart...")
+        death_count_text = framework.render_fps_font(FPS_FONT, f"Deaths: {death_count} Enter to restart...")
         display.blit(death_count_text, (20, 100))
 
 
