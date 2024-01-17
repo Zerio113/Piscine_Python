@@ -75,6 +75,8 @@ SMALL_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 
 start_time = time.time()
 begin = time.time()
+current_time = 0
+max_time = 200
 
 entities = []
 
@@ -185,6 +187,22 @@ while not menu:
     now = time.time()
     dt = now - prev_time
     prev_time = now
+
+    remaining_time = max_time - current_time
+    remaining_time = int(remaining_time)
+
+    if not dead:
+        remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
+        display.blit(remaining_time_text, (10, 50))
+        current_time += dt
+
+        if current_time >= max_time:
+            dead = True
+
+    else:
+
+        start_time = time.time()
+        current_time = 0
 
     tile_rects = framework.render_tiles(display, scroll, tiles, [player.player_rect.x-scroll[0], player.player_rect.y-scroll[1]], block_dict)
     #for tile in tile_rects:
