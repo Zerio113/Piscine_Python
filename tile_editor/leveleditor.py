@@ -37,6 +37,7 @@ block13 = engine.LoadImage(os.path.join('data', 'sprite', 'Connecter4.png'))
 block14 = engine.LoadImage(os.path.join('data', 'sprite', 'torch.png'))
 
 block15 = engine.LoadImage(os.path.join('data', 'sprite', 'Skeleton1.png'))
+block16 = engine.LoadImage(os.path.join('data', 'sprite', 'door.png'))
 
 sprites = {"block0": block0,
            "block1": block1, "block2": block2, "block3": block3,
@@ -45,7 +46,7 @@ sprites = {"block0": block0,
 
            "block10": block10,
            "block11": block11, "block12": block12, "block13": block13,
-           "block14": block14, "block15": block15}
+           "block14": block14, "block15": block15, "block16": block16 }
 
 # SPRITE OPTION
 class SpriteOption():

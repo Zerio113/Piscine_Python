@@ -37,8 +37,9 @@ block9 = load_img('assets/images/TopMiddle.png', False)
 
 block10 = load_img('assets/images/Connecter.png', False)
 block11 = load_img('assets/images/Connecter2.png', False)
-block12 =load_img('assets/images/Connecter3.png', False)
+block12 = load_img('assets/images/Connecter3.png', False)
 block13 = load_img('assets/images/Connecter4.png', False)
+block16 = load_img('assets/images/door.png', False)
 
 torch_img = load_img("assets/images/torch.png", False)
 

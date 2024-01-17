@@ -37,7 +37,7 @@ class Player:
         self.player_movement = [0,0]
         self.air_timer += 1
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_a]:
+        if keys[pygame.K_q]:
             if self.air_timer < 6:
                 self.current_animation = 1
             else:
@@ -51,7 +51,7 @@ class Player:
                 self.animation_count = 2
             self.player_movement[0] += self.movement_speed*dt*TARGET_FPS
 
-        if not keys[pygame.K_d] and not keys[pygame.K_a]:
+        if not keys[pygame.K_d] and not keys[pygame.K_q]:
             if self.air_timer < 6:
                 self.current_animation = 0 #Set the animation to idle
             else:
