@@ -18,8 +18,6 @@ from scripts.entity import Entity
 from scripts.enemy import Enemy, FlyingEnemy, FlyingDestoryer
 import sys
 
-
-
 pygame.init()
 
 display = pygame.Surface((300, 233.33))

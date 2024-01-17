@@ -16,7 +16,6 @@ win = engine.SetWindow(1600, 900, pygame.RESIZABLE, 1)
 blockSurface = engine.SetSurface(1280, 736)
 
 # Sprites
-
 block0 = engine.LoadImage(os.path.join('data', 'sprite', 'block0.png'))
 
 block1 = engine.LoadImage(os.path.join('data', 'sprite', 'BottomCornerLeft.png'))
@@ -38,6 +37,8 @@ block14 = engine.LoadImage(os.path.join('data', 'sprite', 'torch.png'))
 
 block15 = engine.LoadImage(os.path.join('data', 'sprite', 'Skeleton1.png'))
 block16 = engine.LoadImage(os.path.join('data', 'sprite', 'door.png'))
+block18 = engine.LoadImage(os.path.join('data', 'sprite', 'door.png'))
+block17 = engine.LoadImage(os.path.join('data', 'sprite', 'heart.png'))
 
 sprites = {"block0": block0,
            "block1": block1, "block2": block2, "block3": block3,
@@ -46,7 +47,8 @@ sprites = {"block0": block0,
 
            "block10": block10,
            "block11": block11, "block12": block12, "block13": block13,
-           "block14": block14, "block15": block15, "block16": block16 }
+           "block14": block14, "block15": block15, "block16": block16,
+           "block17": block17, "block18": block18 }
 
 # SPRITE OPTION
 class SpriteOption():
@@ -109,7 +111,7 @@ def SaveWorld(blocks):
     f.close()
 
 
-def OpenWorld(): 
+def OpenWorld():
     blocks = CreateBlocks()
 
     extensions = [('Text Document', '*.txt')]
@@ -141,7 +143,7 @@ for z in sprites.items():
     option = SpriteOption(rect, z[0])
 
     spriteOptions.append(option)
-    y += 40
+    y += 30
 
 
 # VARIABLES
@@ -186,7 +188,7 @@ while game:
     if saveRect.collidepoint(pygame.mouse.get_pos()):
         if Input.GetMouseButtonDown(0):
             blocks = SaveWorld(blocks)
-        
+
 
     # OPTION
     selectedSpriteText = font.render(
