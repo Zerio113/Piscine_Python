@@ -127,6 +127,11 @@ def fancy_lighting_on():
     lighting = True
     print(lighting)
 
+is_muted = False
+mute_message = ''
+mute_message_timer = 0
+
+
 while menu:
     display.fill((17, 5, 36))
     for event in pygame.event.get():
@@ -139,20 +144,13 @@ while menu:
             if event.button == 1:
                 clicking = True
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_e:
-                lighting = not lighting
-                print(lighting)
-                
-        '''if event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1:
-                clicking = False'''
+    main_menu_text = framework.render_fps_font(FPS_FONT_HIGH, "MAZE THE GIMS")
+    display.blit(main_menu_text, (30, 3))
 
-    main_menu_text = framework.render_fps_font(FPS_FONT, "MAZE THE GIMS")
-    display.blit(main_menu_text, (110, 25))
+    main_menu_made = framework.render_fps_font(SMALL_FONT, "Made by: @TheGims")
+    display.blit(main_menu_made, (50, 50))
 
-    framework.render_button(display, "Play", FPS_FONT_HIGH, False, (255,255,255), (115, 80), clicking, play, True)
-
+    framework.render_button(display, "Play", FPS_FONT_HIGH, False, (255,255,255), (115, 110), clicking, play, True)
 
     SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     #SCREEN.blit(pygame.transform.scale(shadows,WINDOW_SIZE),(0,0))
@@ -174,7 +172,7 @@ while not menu:
     if player.player_movement[0] > 0 or player.player_movement[0] < 0:
         if boot_cooldown_sfx <= 0:
             sound = random.choice(["assets/sound_effects/boot1.wav", "assets/sound_effects/boot2.wav"])
-            framework.play_sound(sound)
+            framework.play_sound(sound, is_muted)
             boot_cooldown_sfx = 20
         else:
             boot_cooldown_sfx -= 1
@@ -216,6 +214,21 @@ while not menu:
                     if player.air_timer < 6:
                         player.vertical_momentum = -6
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                    # Basculer l'état de is_muted
+                    is_muted = not is_muted
+                    # Ajuster le volume en fonction de l'état de is_muted
+                    if is_muted:
+                        pygame.mixer.fadeout(500)  # Faites disparaître tous les sons en 500 millisecondes
+                        mute_message = 'Son coupé'
+                        mute_message_timer = 100  # Affichez le message pendant 100 tours de boucle
+                        print("stop")
+                    else:
+                        pygame.mixer.unpause()
+                        mute_message = 'Son réactivé'
+                        mute_message_timer = 100  # Affichez le message pendant 100 tours de boucle
+                        print("start")
 
             if event.key == pygame.K_RETURN:
                 tiles, lights, gold, enemys = framework.load_map(maps[map_index])
@@ -234,7 +247,7 @@ while not menu:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1 and shoot_cooldown <= 0:
-                framework.play_sound("assets/sound_effects/throw.flac")
+                framework.play_sound("assets/sound_effects/throw.flac", is_muted)
                 mp = pygame.mouse.get_pos()
                 rel_x, rel_y = mp[0] - player.player_rect.x-scroll[0], mp[1] - player.player_rect.y-scroll[1]
                 angle = (180 / math.pi) * -math.atan2(rel_y, rel_x)
@@ -251,7 +264,7 @@ while not menu:
         for enemy in enemies:
             try:
                 if pygame.Rect(bullet.x-scroll[0]-25, bullet.y-scroll[1]-25, 16, 16).colliderect(pygame.Rect(enemy.x-scroll[0]+enemy.rect.width, enemy.y-scroll[1]+enemy.rect.height, enemy.rect.width, enemy.rect.height)):
-                    framework.play_sound("assets/sound_effects/skeleton_death.wav")
+                    framework.play_sound("assets/sound_effects/skeleton_death.wav", is_muted)
                     screen_shake = 10
                     for x in range(50):
                         #x, y, x_vel, y_vel, gravity, radius
@@ -269,7 +282,7 @@ while not menu:
                 if pygame.Rect(bullet.x-scroll[0]-25, bullet.y-scroll[1]-25, 70, 70).colliderect(pygame.Rect(player.player_rect.x-scroll[0], player.player_rect.y-scroll[1], player.player_rect.width, player.player_rect.height)):
                     player.player_rect.y -= 3
                     player.vertical_momentum = -10
-                framework.play_sound("assets/sound_effects/explosion.wav")
+                framework.play_sound("assets/sound_effects/explosion.wav", is_muted)
                 screen_shake = 10
                 for x in range(50):
 
@@ -278,7 +291,7 @@ while not menu:
 
                 for enemy in enemies:
                     if pygame.Rect(bullet.x-scroll[0]-25, bullet.y-scroll[1]-25, 50, 50).colliderect(pygame.Rect(enemy.x-scroll[0]+enemy.rect.width, enemy.y-scroll[1]+enemy.rect.height, enemy.rect.width, enemy.rect.height)):
-                        framework.play_sound("assets/sound_effects/skeleton_death.wav")
+                        framework.play_sound("assets/sound_effects/skeleton_death.wav", is_muted)
                         enemies.remove(enemy)
 
                 try:
@@ -287,10 +300,6 @@ while not menu:
                 except:
                     pass
                 break
-
-
-
-
 
     for particle in particles:
         particle[0] += particle[2]
@@ -353,10 +362,22 @@ while not menu:
     framework.handle_particles(display, scroll)
 
 
-    if dead:
-        death_count_text = framework.render_fps_font(FPS_FONT, f"Deaths: {death_count} Enter to restart...")
-        display.blit(death_count_text, (20, 100))
+    if map_index == 0:
+        text = framework.render_fps_font(SMALL_FONT, "Hunt for the artifacts to open the exit and survive the LabEgypts")
+        display.blit(text, (150-scroll[0], 100-scroll[1]))
 
+        text2 = framework.render_fps_font(SMALL_FONT, "S to walk left, D to walk right, Space to jump")
+        display.blit(text2, (80-scroll[0], -50-scroll[1]))
+
+        text2 = framework.render_fps_font(SMALL_FONT, "Click to fire bomb and kill enemy's")
+        display.blit(text2, (80 - scroll[0], -50 - scroll[1]))
+
+    if dead:
+        death_count_text = framework.render_fps_font(FPS_FONT, f"Deaths: {death_count}")
+        retry_text = framework.render_fps_font(FPS_FONT, f"Enter to restart...")
+
+        display.blit(death_count_text, (20, 80))
+        display.blit(retry_text, (20, 100))
 
     start_time += dt*5
     for i in reversed(range(1)):
@@ -379,7 +400,7 @@ while not menu:
 
     for g in gold:
         if pygame.Rect(player.player_rect.x-scroll[0], player.player_rect.y-scroll[1], player.player_rect.width, player.player_rect.height).colliderect(g[0]-scroll[0], g[1]-scroll[1], 16, 16):
-            framework.play_sound("assets/sound_effects/pickup.wav")
+            framework.play_sound("assets/sound_effects/pickup.wav", is_muted)
             gold.remove(g)
             for x in range(30):
                 #x, y, x_vel, y_vel, gravity, radius
@@ -426,7 +447,7 @@ while not menu:
                 player.player_rect.height):
 
             if player.health <= 0 and not dead:
-                framework.play_sound("assets/sound_effects/player_death.wav")
+                framework.play_sound("assets/sound_effects/player_death.wav", is_muted)
                 screen_shake = 10
                 dead = True
             enemy_bullets.remove(bullet)
@@ -445,7 +466,7 @@ while not menu:
 
     if screen_shake > 0:
         screen_shake -= 1
-    
+
     #Update Screen--------------------------------------------------
 
     SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))

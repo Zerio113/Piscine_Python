@@ -139,9 +139,10 @@ def getList(dict):
           
     return list
 
-def play_sound(path_to_sound):
-    sound = pygame.mixer.Sound(path_to_sound)
-    sound.play()
+def play_sound(path_to_sound, is_muted):
+    if not is_muted:
+        sound = pygame.mixer.Sound(path_to_sound)
+        sound.play()
 
 def render_tiles(display, scroll, tiles, player_pos, tile_index):
     tile_rects = []
