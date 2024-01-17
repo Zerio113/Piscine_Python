@@ -75,7 +75,7 @@ SMALL_FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 20)
 start_time = time.time()
 begin = time.time()
 current_time = 0
-max_time = 5
+max_time = 300
 
 
 entities = []
