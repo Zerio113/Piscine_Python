@@ -39,7 +39,7 @@ class Player():
     def __init__(self):
         self.gameObject = engine.GameObject(64, 500, 32, 32, playerSprite)
         self.runSpeed = 1
-        self.maxSpeed = 2
+        self.maxSpeed = 1
         self.jumpSpeed = 2
         self.velocityY = 0
         self.maxSpeedX = 1
