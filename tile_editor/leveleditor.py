@@ -12,7 +12,7 @@ clock = engine.CreateClock()
 FPS = 30
 # Window
 infoObject = pygame.display.Info()
-win = engine.SetWindow(1400, 500, pygame.RESIZABLE, 1)
+win = engine.SetWindow(1600, 900, pygame.RESIZABLE, 1)
 blockSurface = engine.SetSurface(1280, 736)
 
 # Sprites
@@ -38,7 +38,6 @@ block14 = engine.LoadImage(os.path.join('data', 'sprite', 'torch.png'))
 
 block15 = engine.LoadImage(os.path.join('data', 'sprite', 'Skeleton1.png'))
 block16 = engine.LoadImage(os.path.join('data', 'sprite', 'door.png'))
-block17 = engine.LoadImage(os.path.join('data', 'sprite', 'Bomb.png'))
 
 sprites = {"block0": block0,
            "block1": block1, "block2": block2, "block3": block3,
@@ -47,7 +46,7 @@ sprites = {"block0": block0,
 
            "block10": block10,
            "block11": block11, "block12": block12, "block13": block13,
-           "block14": block14, "block15": block15, "block16": block16, "block17": block17}
+           "block14": block14, "block15": block15, "block16": block16 }
 
 # SPRITE OPTION
 class SpriteOption():
