@@ -52,7 +52,7 @@ maps = ["assets/maps/level1.txt","assets/maps/level2.txt", "assets/maps/level3.t
 gold_per_level = [3, 6, 3, 6]
 gold_count = 0 
 map_index = 0
-tiles, lights, gold, enemys = framework.load_map(maps[map_index])
+tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
 
 pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
 
@@ -249,7 +249,7 @@ while not menu:
                         print("start")
 
             if event.key == pygame.K_RETURN:
-                tiles, lights, gold, enemys = framework.load_map(maps[map_index])
+                tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
                 entities = []
                 enemies = []
                 has_spawned_death_particles = False
@@ -346,7 +346,7 @@ while not menu:
             if circle_radius > 300:
 
                 map_index += 1
-                tiles, lights, gold, enemys = framework.load_map(maps[map_index])
+                tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
                 entities = []
                 enemies = []
                 for enemy in enemys:
@@ -427,6 +427,16 @@ while not menu:
             player.health += 1  # Increase player's health
         g[1] += np.sin(start_time)/5
         display.blit(gold_img, (g[0]-scroll[0], g[1]-scroll[1]))
+
+    for t in teleport_golds:
+        if pygame.Rect(player.player_rect.x-scroll[0], player.player_rect.y-scroll[1], player.player_rect.width, player.player_rect.height).colliderect(t[0]-scroll[0], t[1]-scroll[1], 16, 16):
+            framework.play_sound("assets/sound_effects/pickup.wav", is_muted)
+            for x in range(30):
+                #x, y, x_vel, y_vel, gravity, radius
+                particles.append([t[0]+random.randrange(-20, 20), t[1]+random.randrange(-10, 10), random.randrange(-3, 3), 3, 2, (255, 184, 74)])
+            map_index += 1
+        t[1] += np.sin(start_time)/5
+        display.blit(teleport_gold_img, (t[0]-scroll[0], t[1]-scroll[1]))
 
     for enemy in enemies:
         if enemy.name == "FlyingEnemy":

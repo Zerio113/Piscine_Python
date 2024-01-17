@@ -17,15 +17,18 @@ entities = []
 
 def load_map(map_name):
     blocks = []
+    teleport_golds = []
     with open(map_name, "r") as a_file:
         for line in a_file:
             stripped_line = line.strip()
             stripped_line = stripped_line.split(" ")
             blocks.append(stripped_line)
+            teleport_golds.append(stripped_line)
         a_file.close()
 
     lights = []
     gold = []
+    teleport_golds = []
     enemies = []
     for _ in blocks:
         if _[2] == "block14": #If the block is long grass
@@ -33,14 +36,14 @@ def load_map(map_name):
 
         if _[2] == "block15": #If the block is long grass
             enemies.append([int(_[0]), int(_[1])-350])
-            
+
             blocks.remove(_)
         if _[2] == "block0": #If the block is long grass
             gold.append([int(_[0]), int(_[1])-350])
-            
+
             blocks.remove(_)
 
-    return blocks, lights, gold, enemies
+    return blocks, lights, gold, enemies, teleport_golds
 
 def load_font(font_name, font_size):
     return pygame.font.Font(font_name, font_size)

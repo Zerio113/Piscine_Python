@@ -45,6 +45,8 @@ torch_img = load_img("assets/images/torch.png", False)
 
 gold_img = load_img("assets/images/block0.png", False)
 potion_img = pygame.image.load('assets/images/Bomb.png').convert_alpha()
+teleport_gold_img = pygame.image.load('assets/images/Bomb.png')
+
 
 
 bow_img = load_img("assets/images/Bow.png", False)
