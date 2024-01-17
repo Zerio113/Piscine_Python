@@ -30,9 +30,10 @@ playerSprite = engine.LoadImage(os.path.join('data', 'sprite', 'player.png'))
 block0 = engine.LoadImage('./data/sprite/block0.png')
 block1 = engine.LoadImage('./data/sprite/block1.png')
 block2 = engine.LoadImage('./data/sprite/block2.png')
+block17 = engine.LoadImage('./data/sprite/block17.png')
 
 sprites = {"playerSprite": playerSprite,
-           "block0": block0, "block1": block1, "block2": block2}
+           "block0": block0, "block1": block1, "block2": block2, "block17": block17}
 
 # Player
 class Player():

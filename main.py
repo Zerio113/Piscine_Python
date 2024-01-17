@@ -45,7 +45,8 @@ block_dict = {
 "block10": block10,
 "block11": block11, 
 "block12": block12, 
-"block13": block13
+"block13": block13,
+"block17": teleport_gold_img
 }
 
 maps = ["assets/maps/level1.txt","assets/maps/level2.txt", "assets/maps/level3.txt", "assets/maps/level4.txt"]

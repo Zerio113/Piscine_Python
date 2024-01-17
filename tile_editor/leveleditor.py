@@ -12,7 +12,7 @@ clock = engine.CreateClock()
 FPS = 30
 # Window
 infoObject = pygame.display.Info()
-win = engine.SetWindow(1600, 900, pygame.RESIZABLE, 1)
+win = engine.SetWindow(1400, 500, pygame.RESIZABLE, 1)
 blockSurface = engine.SetSurface(1280, 736)
 
 # Sprites
@@ -47,7 +47,7 @@ sprites = {"block0": block0,
 
            "block10": block10,
            "block11": block11, "block12": block12, "block13": block13,
-           "block14": block14, "block15": block15, "block16": block16, "block17": block17 }
+           "block14": block14, "block15": block15, "block16": block16, "block17": block17}
 
 # SPRITE OPTION
 class SpriteOption():
