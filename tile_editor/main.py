@@ -38,11 +38,11 @@ sprites = {"playerSprite": playerSprite,
 class Player():
     def __init__(self):
         self.gameObject = engine.GameObject(64, 500, 32, 32, playerSprite)
-        self.runSpeed = 2
+        self.runSpeed = 1
         self.maxSpeed = 2
-        self.jumpSpeed = 4
+        self.jumpSpeed = 2
         self.velocityY = 0
-        self.maxSpeedX = 3
+        self.maxSpeedX = 1
         self.dx = 0
         self.jump = 1
         self.selectedLevel = 1
