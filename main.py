@@ -3,6 +3,9 @@ I was able to work on the game full-time and had many irl thing to do, the code 
 (also there are definitly bugs xD)'''
 
 import pygame
+import pyganim
+import random
+
 import time
 from scripts.constants import *
 import scripts.framework as framework
@@ -119,22 +122,10 @@ def play():
 lighting = True
 
 
-
 def fancy_lighting_off():
     global lighting
     lighting = False
     print(lighting)
-
-def star_wars_crawl(display, text, speed):
-    font = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 35)
-    text_surface = font.render(text, True, (255, 255, 255))
-    text_rect = text_surface.get_rect(center=(150, 233.33))
-    while text_rect.y > -text_surface.get_height():
-        display.fill((0, 0, 0))
-        display.blit(text_surface, text_rect)
-        pygame.display.flip()
-        text_rect.y -= speed
-        pygame.time.wait(100)
 
 def fancy_lighting_on():
     global lighting
@@ -144,7 +135,11 @@ def fancy_lighting_on():
 is_muted = False
 mute_message = ''
 mute_message_timer = 0
-
+credits = False
+text_position_y = WINDOW_SIZE[1]  # Commencer en bas de l'écran
+frame_index = 0
+background_image = pygame.image.load('./assets/images/Arrow.png')
+isWaiting = False
 
 while menu:
     display.fill((17, 5, 36))
@@ -163,8 +158,10 @@ while menu:
 
     main_menu_made = framework.render_fps_font(SMALL_FONT, "Made by: @TheGims")
     display.blit(main_menu_made, (50, 50))
+    main_menu_made = framework.render_fps_font(SMALL_FONT, "Made for: Esiee-IT")
+    display.blit(main_menu_made, (5, 210))
 
-    framework.render_button(display, "Play", FPS_FONT_HIGH, False, (255,255,255), (115, 110), clicking, play, True)
+    framework.render_button(display, "Play", FPS_FONT_HIGH, False, (255,255,255), (145, 135), clicking, play, True)
 
     SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     #SCREEN.blit(pygame.transform.scale(shadows,WINDOW_SIZE),(0,0))
@@ -173,8 +170,7 @@ while menu:
 
     death_count = 0
 
-
-while not menu:
+while not menu and not credits:
     framework.fill_displays([display, shadows], [(17, 5, 36), (0,0,0)])
 
 
@@ -259,6 +255,7 @@ while not menu:
 
                 player = player_.Player(100, 100, 4)
                 gold_count = 0
+                isWaiting = False
                 teleport_gold_count = 0
                 circle_radius = 30
                 dead = False
@@ -346,7 +343,7 @@ while not menu:
                 current_time = 0  # Réinitialisez le timer
                 if circle_radius > 300:
 
-                    map_index += 5
+                    map_index += 3
                     tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
                     entities = []
                     enemies = []
@@ -358,7 +355,7 @@ while not menu:
                     teleport_gold_count = 0
                     circle_radius = 30
 
-    if map_index == 1 or map_index == 3:
+    if map_index == 1:
         print(teleport_gold_count)
         if int(teleport_gold_count) >= teleport_gold_per_level[map_index]:
             circle_radius += circle_radius // 12
@@ -375,26 +372,63 @@ while not menu:
             gold_count = 0
             circle_radius = 30
 
-    elif map_index == 4:
-        circle_radius += circle_radius//12
-        pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
-        FONT = pygame.font.Font("assets/font/AvenuePixel-Regular.ttf", 35)
-        star_wars_crawl(display, "You Win! Thanks for playing", 1)
+    if map_index == 3:
+        print(teleport_gold_count)
+        if int(teleport_gold_count) >= teleport_gold_per_level[map_index]:
+            circle_radius += circle_radius // 12
+            pygame.draw.circle(display, (0, 0, 0), (300 // 2, 233.33 // 2), circle_radius)
+            map_index += random.choice([1, 2])  # Ajoute 1 ou 2 à map_index avec une probabilité de 50%
+            current_time = 0  # Réinitialisez le timer
+            tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
+            entities = []
+            enemies = []
+            for enemy in enemys:
+                enemies.append(FlyingEnemy(enemy[0], enemy[1], "FlyingEnemy"))
 
+            player = player_.Player(100, 100, 4)
+            gold_count = 0
+            circle_radius = 30
 
-    '''fps = str(int(CLOCK.get_fps()))
-    fps_text = framework.render_fps_font(FPS_FONT, fps)
-    display.blit(fps_text, (25,25))'''
+    if map_index == 4:
+        if int(gold_count) >= gold_per_level[map_index]:
 
-    '''for tile in tiles:
-        if int(tile[1])-scroll[1] < player.player_rect.y-scroll[1]:
+                circle_radius += circle_radius//12
+                pygame.draw.circle(display, (0,0,0), (300//2, 233.33//2), circle_radius)
+                current_time = 0  # Réinitialisez le timer
+                if circle_radius > 300:
 
-            dist = math.hypot((int(tile[0])-scroll[0])-(player.player_rect.x-scroll[0]), (int(tile[1])-scroll[1])-(player.player_rect.y-scroll[1]))
-            if dist < 80:
-                if tile[4] == "block4":
-                     if abs((int(tile[0])-scroll[0])-(player.player_rect.x-scroll[0])) < 10:
-                        pygame.draw.rect(display, (255, 0, 0), (int(tile[0])-scroll[0], int(tile[1])-350-scroll[1], 16, 16))
-                        fall_tiles.append(tile)'''
+                    map_index += 2
+                    tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
+                    entities = []
+                    enemies = []
+                    for enemy in enemys:
+                        enemies.append(FlyingEnemy(enemy[0], enemy[1], "FlyingEnemy"))
+
+                    player = player_.Player(100, 100, 4)
+                    gold_count = 0
+                    teleport_gold_count = 0
+                    circle_radius = 30
+
+    if map_index == 5:
+        print(teleport_gold_count)
+        if int(teleport_gold_count) >= teleport_gold_per_level[map_index]:
+            circle_radius += circle_radius // 12
+            pygame.draw.circle(display, (0, 0, 0), (300 // 2, 233.33 // 2), circle_radius)
+            map_index += 1
+            current_time = 0  # Réinitialisez le timer
+            tiles, lights, gold, enemys, teleport_golds = framework.load_map(maps[map_index])
+            entities = []
+            enemies = []
+            for enemy in enemys:
+                enemies.append(FlyingEnemy(enemy[0], enemy[1], "FlyingEnemy"))
+
+            player = player_.Player(100, 100, 4)
+            gold_count = 0
+            circle_radius = 30
+
+    if map_index == 6:
+        credits = True
+        print("yes")
 
     framework.handle_particles(display, scroll)
 
@@ -410,6 +444,8 @@ while not menu:
         display.blit(text2, (80 - scroll[0], -50 - scroll[1]))
 
     if dead:
+        isWaiting = True
+
         death_count_text = framework.render_fps_font(FPS_FONT, f"Deaths: {death_count}")
         retry_text = framework.render_fps_font(FPS_FONT, f"Enter to restart...")
 
@@ -499,29 +535,40 @@ while not menu:
                 dead = True
             enemy_bullets.remove(bullet)
             screen_shake = 5
-            player.health -= 1
+            if not isWaiting:
+                player.health -= 1
 
             break
         if bullet[3] <= 0:
             enemy_bullets.remove(bullet)
 
-    if map_index == 0 or map_index == 2:
+    if map_index == 0 or map_index == 2 or map_index == 4:
         gold_count_text = framework.render_fps_font(FPS_FONT, f"Parchemins: {gold_count}/{gold_per_level[map_index]}")
         vies_count_text = framework.render_fps_font(FPS_FONT, f"Vies: {player.health}/3")
+        remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
+
 
         display.blit(gold_count_text, (10, 10))
         display.blit(vies_count_text, (10, 30))
+        display.blit(remaining_time_text, (10, 50))
 
-    elif map_index == 1:
+    elif map_index == 1 or map_index == 3:
         portal_text = framework.render_fps_font(FPS_FONT, f"Find the portal")
-        display.blit(portal_text, (10, 10))
+        remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
 
+        display.blit(portal_text, (10, 10))
+        display.blit(remaining_time_text, (10, 30))
+    elif map_index == 5:
+        portal_text = framework.render_fps_font(FPS_FONT, f"Beat the monster to get to the top exit")
+        remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
+
+        display.blit(portal_text, (10, 10))
+        display.blit(remaining_time_text, (10, 30))
     if screen_shake > 0:
         screen_shake -= 1
 
     if not dead:
         remaining_time_text = framework.render_fps_font(FPS_FONT, f"Timer: {remaining_time}")
-        display.blit(remaining_time_text, (10, 50))
         current_time += dt
 
         if current_time >= max_time_per_level[map_index]:
@@ -531,5 +578,48 @@ while not menu:
     SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     if lighting:
         SCREEN.blit(pygame.transform.scale(shadows,WINDOW_SIZE),(0,0))
+    pygame.display.flip()
+    CLOCK.tick(FPS)
+
+while credits:
+    display.blit(background_image, (0, 0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+            quit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                clicking = True
+
+    main_menu_text = framework.render_fps_font(FPS_FONT, "MAZE THE GIMS")
+    display.blit(main_menu_text, (10, text_position_y))
+
+    main_menu_made = framework.render_fps_font(SMALL_FONT, "Made by: @TheGims")
+    display.blit(main_menu_made, (10, text_position_y + 30))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 50))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 60))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 70))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 80))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 90))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 100))
+    main_menu_thanks = framework.render_fps_font(SMALL_FONT, "Merci les gas <3")
+    display.blit(main_menu_thanks, (10, text_position_y + 110))
+
+    text_position_y -= 0.5  # Déplacer le texte vers le haut
+
+    # Si le texte a complètement quitté l'écran, le remettre en bas
+    if text_position_y < -30:  # -30 pour tenir compte de la hauteur du texte
+        text_position_y = WINDOW_SIZE[1]
+    framework.render_button(display, "Exit", SMALL_FONT, False, (255,255,255), (230, 170), clicking, play, True)
+
+    SCREEN.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.flip()
     CLOCK.tick(FPS)
