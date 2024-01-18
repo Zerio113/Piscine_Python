@@ -15,3 +15,4 @@ TARGET_FPS = 60
 #FPS_FONT = load_font("dpcomic.ttf", 40)
 CLOCK = pygame.time.Clock()
 
+
