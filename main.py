@@ -3,7 +3,6 @@ I was able to work on the game full-time and had many irl thing to do, the code 
 (also there are definitly bugs xD)'''
 
 import pygame
-import pyganim
 import random
 
 import time
